@@ -1,5 +1,5 @@
-.row {
-  margin-top: 200px;
+:root {
+  --primary-bg-color: #02c39a;
 }
 
 .login {
@@ -7,7 +7,7 @@
   height: auto;
   padding: 50px 30px;
   border-radius: 15px;
-  background-color: #02c39a;
+  background-color: var(--primary-bg-color);
   text-align: center;
   margin: 0 auto;
   box-shadow: 1px 2px 10px 4px rgb(184, 184, 184);
@@ -56,4 +56,23 @@
     border-color: transparent !important;
     outline: transparent !important;
     box-shadow: none !important;
+}
+
+.login-row {
+  margin-top: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.login-link {
+  color: white;
+}
+
+.login-link:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.login-link:active {
+  color: white;
 }

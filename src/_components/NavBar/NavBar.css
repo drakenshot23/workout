@@ -1,0 +1,23 @@
+.nav-color {
+    background-color: #02c39a;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+/* mouse over link */
+.nav-link:hover {
+    color: white;
+  }
+  
+  /* selected link */
+  .nav-link:active {
+    color: white;
+  }
+
+.homeLogo {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,18 @@
+.card {
+    box-shadow: 1px 2px 3px 1px rgb(184, 184, 184);
+}
+
+.event-card {
+    margin-top: 10px;
+}
+
+.event-user-name {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size: 23px;
+}
+
+.event-user-margin {
+    margin-top: 10px;
+    margin-left: 15px;
+}
