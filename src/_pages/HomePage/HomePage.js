@@ -16,11 +16,11 @@ class HomePage extends Component {
         <div>
             <NavBar></NavBar>
             <div className="container">
-                <div className="row">
-                    <div className="col-xs-3">
+                <div className="row justify-content-md-center">
+                    <div className="col-3">
                         <ProfileInfoCard></ProfileInfoCard>
                     </div>
-                    <div className="col-xs-9">
+                    <div className="col-8">
                         {cards}
                     </div>
                 </div>

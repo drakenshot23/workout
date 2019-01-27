@@ -11,7 +11,7 @@ class SignInPage extends Component {
     render ()
     {
         return(
-            <div className="container">
+            <div className="container signinForm">
                 <div className="row justify-content-center">
                     <div className="form-group login justify-content-center">
                         <img src={logo} width="66" height="35" alt="workoutLogo" className="workoutLogo"/><br />                 

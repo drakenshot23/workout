@@ -2,6 +2,10 @@
   --primary-bg-color: #02c39a;
 }
 
+.loginForm {
+  margin-top: 200px;
+}
+
 .login {
   width: 450px;
   height: auto;

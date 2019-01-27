@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import logo from '../../_assets/workoutLogo.png';
+import './ResetPasswordPage.css';
 
 class ResetPasswordPage extends Component {
 
@@ -11,7 +12,7 @@ class ResetPasswordPage extends Component {
     render ()
     {
         return(
-            <div className="container">
+            <div className="container resetPasswordForm">
                 <div className="row justify-content-center">
                     <div className="form-group login justify-content-center">
                         <img src={logo} width="66" height="35" alt="workoutLogo" className="workoutLogo"/><br />
