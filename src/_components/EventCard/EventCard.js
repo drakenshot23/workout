@@ -7,7 +7,7 @@ class EventCard extends Component {
         return(
             <div className="card event-card">
                 <div className="d-flex justify-content-start event-user-margin">
-                    <img src={profileImage} width="45" height="45" alt="user image profile"/>
+                    <img src={profileImage} width="45" height="45" alt="user profile"/>
                     <h3 className="event-user-name">Ariana Mendy</h3>
                 </div>
                 <div className="card-body">

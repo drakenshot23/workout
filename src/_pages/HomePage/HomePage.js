@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import NavBar from '../../_components/NavBar/NavBar';
 import EventCard from '../../_components/EventCard/EventCard';
 import ProfileInfoCard from '../../_components/ProfileInfoCard/ProfileInfoCard';
+import PropTypes from 'prop-types';
+import {verifyUserToken} from '../../_helpers/verifyUserToken';
+
 
 class HomePage extends Component {
+
+    componentWillMount() {
+        verifyUserToken(this.props);
+    }
+
     render()
     {
         var cards = []
@@ -30,4 +39,12 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+    cards: PropTypes.array,
+}
+
+const mapStateToProps = state => ({
+    cards: state.cards
+})
+
+export default connect(mapStateToProps)(HomePage);
