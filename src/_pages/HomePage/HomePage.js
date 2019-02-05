@@ -5,22 +5,28 @@ import EventCard from '../../_components/EventCard/EventCard';
 import ProfileInfoCard from '../../_components/ProfileInfoCard/ProfileInfoCard';
 import PropTypes from 'prop-types';
 import {verifyUserToken} from '../../_helpers/verifyUserToken';
-
+import {initHomeEvents} from '../../_actions/event-actions';
 
 class HomePage extends Component {
 
     componentWillMount() {
         verifyUserToken(this.props);
+        let token = localStorage.getItem('token');
+        let user = localStorage.getItem('user');
+        if (token !== null && user !== null) {
+            let config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+            this.props.initHomeEvents(config);
+        }
     }
 
     render()
     {
-        var cards = []
 
-        for(let i = 0; i < 2; i++){
-            cards.push(<EventCard key={i}></EventCard>);
-        }
-
+        const {cards} = this.props;
         return (
         <div>
             <NavBar></NavBar>
@@ -30,7 +36,7 @@ class HomePage extends Component {
                         <ProfileInfoCard></ProfileInfoCard>
                     </div>
                     <div className="col-8">
-                        {cards}
+                        {Array.isArray(cards) && cards.map((card, index) =>  <EventCard key={index} firstName={card.eventCreator.user.first_name} lastName={card.eventCreator.user.last_name} description={card.description} maxParticipants={card.maxParticipants}></EventCard>)}
                     </div>
                 </div>
             </div>
@@ -40,11 +46,13 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
+    initHomeEvents: PropTypes.func.isRequired,
     cards: PropTypes.array,
 }
 
 const mapStateToProps = state => ({
-    cards: state.cards
+    cards: state.events.cards,
+
 })
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, {initHomeEvents})(HomePage);

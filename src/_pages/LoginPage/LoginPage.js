@@ -10,14 +10,22 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 class LoginPage extends Component {
 
-    loginData = {}
-
-    handleMail(e) {
-        this.loginData['username'] = e.target.value;
+    validateEmail(value) {
+        let error;
+        if (!value) {
+          error = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+          error = 'Invalid email address';
+        }
+        return error;
     }
 
-    handlePassword(e) {
-        this.loginData['password'] = e.target.value;
+    validatePassword(value) {
+        let error;
+        if (!value) {
+            error = 'Required';
+        } 
+        return error;
     }
 
     componentWillMount()
@@ -43,18 +51,19 @@ class LoginPage extends Component {
                             onSubmit={(values) => {
                                 if (values.email !== '' && values.password !== ''){
                                     let data = {"username": values.email, "password": values.password}
+                                    values.email = '';
+                                    values.password = '';
                                     this.props.login(data);
-                                    this.props.history.push('/home');
                                 }
                             }}
-                            render={(props, errors) => (
+                            render={(props) => (
                                 <Form>
-                                  <Field type="email" name="email" className="form-control userMail" placeholder="email@example.com" value={props.values.email}/>
+                                  <Field type="email" name="email" className="form-control userMail" placeholder="email@example.com" validate={this.validateEmail} value={props.values.email}/>
                                   <ErrorMessage name="email" />
-                                  <Field type="password" name="password" className="form-control userPassword" placeholder="Mot de passe" value={props.values.password}/>
+                                  <Field type="password" name="password" className="form-control userPassword" placeholder="Mot de passe" validate={this.validatePassword} value={props.values.password}/>
                                   <ErrorMessage name="password" />
                                   <button type="submit" className="btn btn-primary userLoginBtn">
-                                    Submit
+                                    Connexion
                                   </button>
                                 </Form>
                               )}
@@ -73,7 +82,6 @@ class LoginPage extends Component {
 LoginPage.propTypes = {
     login: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool,
-    verifyToken: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

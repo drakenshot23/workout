@@ -2,8 +2,22 @@ import React, {Component} from 'react';
 import './NavBar.css';
 import logo from '../../_assets/workoutLogo.png';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import {logout} from '../../_actions/user-actions';
+import PropTypes from 'prop-types';
+import { withRouter } from "react-router";
+import { verifyUserToken } from '../../_helpers/verifyUserToken';
 
 class NavBar extends Component {
+    
+    componentDidUpdate() {
+        verifyUserToken(this.props);
+        if (!this.props.loggedIn) {
+            localStorage.clear();
+            this.props.history.push('/');
+        }
+    }
+
     render()
     {
         return(
@@ -23,10 +37,12 @@ class NavBar extends Component {
                                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
                                 </li>
                             </ul>
-                            <form className="form-inline my-2 my-lg-0">
-                                <input className="form-control mr-sm-2" type="search" placeholder="Search user" aria-label="Search" />
-                                <button className="btn btn-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
-                            </form>
+                            <button className="btn btn-danger my-2 my-sm-0" onClick={() => {
+                                let token = localStorage.getItem('token');
+                                if (token !== null){
+                                    this.props.logout(token);
+                                }
+                            }}><i className="fas fa-sign-out-alt"></i></button>
                         </div>
                     </nav>
                 </div>
@@ -35,4 +51,15 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+NavBar.propTypes = {
+    logout: PropTypes.func.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = state => ({
+    loggedIn: state.auth.loggedIn,
+})
+
+
+
+export default connect(mapStateToProps, {logout})(withRouter(NavBar));

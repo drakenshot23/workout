@@ -7,7 +7,7 @@ const initialState = {}
 const middleware = [ReduxThunk];
 
 const store = createStore(
-    rootReducer, 
+    rootReducer,
     initialState,
     compose(
         applyMiddleware(...middleware),
