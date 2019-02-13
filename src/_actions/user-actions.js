@@ -3,6 +3,14 @@ import axios from 'axios';
 import {authTypes} from './auth-types';
 
 
+export const register = (data) => dispatch => {
+    axios.post(apiURL + 'auth/create_profile/', data).then(res => {
+        dispatch({type: authTypes.REGISTER, payload: res.data, success: res.data.success});
+    }).catch(error => {
+        dispatch({type: authTypes.REGISTER, payload: null, success: false});
+    })
+}
+
 
 export const login = (data) => dispatch => {
     axios.post(apiURL + 'token-auth/', data).then(res => {

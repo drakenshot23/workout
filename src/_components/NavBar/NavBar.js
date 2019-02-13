@@ -20,6 +20,8 @@ class NavBar extends Component {
 
     render()
     {
+        let username = localStorage.getItem('firstName');
+
         return(
             <div className="container-fluid nav-color">
                 <div className="container">
@@ -28,7 +30,7 @@ class NavBar extends Component {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
-                                    <Link to="/home" className="nav-link" href="#">Accueil<span className="sr-only">(current)</span></Link>
+                                    <Link to="/home" className="nav-link" >Accueil<span className="sr-only">(current)</span></Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/workout_event" className="nav-link">Evenement</Link>
@@ -37,12 +39,20 @@ class NavBar extends Component {
                                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
                                 </li>
                             </ul>
-                            <button className="btn btn-danger my-2 my-sm-0" onClick={() => {
-                                let token = localStorage.getItem('token');
-                                if (token !== null){
-                                    this.props.logout(token);
-                                }
-                            }}><i className="fas fa-sign-out-alt"></i></button>
+                            <div class="btn-group">
+                                <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello {username}</button>
+                                <div className="dropdown-menu">
+                                    <button className="dropdown-item">Action</button>
+                                    <button className="dropdown-item">Another action</button>
+                                    <button className="btn btn-danger my-2 my-sm-0" onClick={() => {
+                                        let token = localStorage.getItem('token');
+                                        if (token !== null){
+                                            this.props.logout(token);
+                                        }
+                                    }}>Logout <i className="fas fa-sign-out-alt"></i></button>
+                                </div>
+                            </div>
+
                         </div>
                     </nav>
                 </div>

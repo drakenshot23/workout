@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './ProfileInfoCard.css';
-import profileImage from '../../_assets/girlProfile.png';
+import blankProfileImage from '../../_assets/blankProfilePhoto.png';
 
 class ProfileInfoCard extends Component {
     render ()
@@ -17,23 +17,23 @@ class ProfileInfoCard extends Component {
         return(
             <div className="card" style={{ marginTop: 10 + 'px'}}>
                 <div className="d-flex justify-content-center" style={{marginTop: 10 + 'px'}}>
-                    <img src={profileImage} width="60" height="60" alt="user profile"/>
+                    <img src={blankProfileImage} width="60" height="60" alt="user profile"/>
                 </div>
                 <div className="d-flex justify-content-center">
-                    <h3 className="event-user-name">Ariana Mendy</h3>
+                    <h3 className="event-user-name">{this.props.firstName} {this.props.lastName}</h3>
                 </div>
                 <div className="card-body">
                     <div className="d-flex justify-content-between profile-border">
                         <div>
-                            21yo
+                            {this.props.age} years
                             {/**Age */}
                         </div>
                         <div>
-                            1m65
+                            {this.props.height}
                             {/**Height */}
                         </div>
                         <div>
-                            56kgs
+                            {this.props.weight}
                             {/**Weight */}
                         </div>
                     </div>

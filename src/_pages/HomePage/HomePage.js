@@ -27,16 +27,19 @@ class HomePage extends Component {
     {
 
         const {cards} = this.props;
+        let firstName = localStorage.getItem('firstName');
+        let lastName = localStorage.getItem('lastName');
+
         return (
         <div>
             <NavBar></NavBar>
             <div className="container">
                 <div className="row justify-content-md-center">
                     <div className="col-3">
-                        <ProfileInfoCard></ProfileInfoCard>
+                        <ProfileInfoCard firstName={firstName} lastName={lastName} age={'21'} height={'1m81'} weight={'70kg'}></ProfileInfoCard>
                     </div>
                     <div className="col-8">
-                        {Array.isArray(cards) && cards.map((card, index) =>  <EventCard key={index} firstName={card.eventCreator.user.first_name} lastName={card.eventCreator.user.last_name} description={card.description} maxParticipants={card.maxParticipants}></EventCard>)}
+                        {Array.isArray(cards) && cards.map((card, index) =>  <EventCard key={index} eventCreator={card.eventCreator.user.id} firstName={card.eventCreator.user.first_name} lastName={card.eventCreator.user.last_name} description={card.description} maxParticipants={card.maxParticipants}></EventCard>)}
                     </div>
                 </div>
             </div>
@@ -52,7 +55,6 @@ HomePage.propTypes = {
 
 const mapStateToProps = state => ({
     cards: state.events.cards,
-
 })
 
 export default connect(mapStateToProps, {initHomeEvents})(HomePage);
