@@ -24,7 +24,7 @@ class App extends Component {
             <Route path="/home" component={HomePage} />
             <Route path="/reset_password" component={ResetPasswordPage} />
             <Route path="/sign_in" component={SignInPage} />
-            <Route path="/dashboard" component={DashboardPage} />
+            {/* <Route path="/dashboard" component={DashboardPage} /> */}
             <Route path="/workout_event" component={WorkoutEventPage} />
           </div>
         </Router>

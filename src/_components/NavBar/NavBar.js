@@ -35,16 +35,14 @@ class NavBar extends Component {
                                 <li className="nav-item">
                                     <Link to="/workout_event" className="nav-link">Evenement</Link>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                                </li>
+                                </li> */}
                             </ul>
-                            <div class="btn-group">
-                                <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello {username}</button>
+                            <div className="btn-group">
+                                <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bonjour {username}</button>
                                 <div className="dropdown-menu">
-                                    <button className="dropdown-item">Action</button>
-                                    <button className="dropdown-item">Another action</button>
-                                    <button className="btn btn-danger my-2 my-sm-0" onClick={() => {
+                                    <button className="dropdown-item" onClick={() => {
                                         let token = localStorage.getItem('token');
                                         if (token !== null){
                                             this.props.logout(token);

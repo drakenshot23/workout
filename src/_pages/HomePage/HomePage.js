@@ -39,7 +39,14 @@ class HomePage extends Component {
                         <ProfileInfoCard firstName={firstName} lastName={lastName} age={'21'} height={'1m81'} weight={'70kg'}></ProfileInfoCard>
                     </div>
                     <div className="col-8">
-                        {Array.isArray(cards) && cards.map((card, index) =>  <EventCard key={index} eventCreator={card.eventCreator.user.id} firstName={card.eventCreator.user.first_name} lastName={card.eventCreator.user.last_name} description={card.description} maxParticipants={card.maxParticipants}></EventCard>)}
+                        {Array.isArray(cards) && cards.map((card, index) =>  <EventCard key={index} 
+                                                                                        eventId={card.id} 
+                                                                                        eventCreator={card.eventCreator.user.id} 
+                                                                                        firstName={card.eventCreator.user.first_name} 
+                                                                                        lastName={card.eventCreator.user.last_name} 
+                                                                                        description={card.description} 
+                                                                                        maxParticipants={card.maxParticipants}>
+                                                                            </EventCard>)}
                     </div>
                 </div>
             </div>

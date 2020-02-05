@@ -1,16 +1,35 @@
 import React, {Component} from 'react';
 import './EventCard.css';
 import blankProfileImage from '../../_assets/blankProfilePhoto.png';
+import { connect } from 'react-redux';
+import {deleteEvent, initHomeEvents} from '../../_actions/event-actions';
 
 
 class EventCard extends Component {
 
+    componentDidUpdate() {
+        if (this.props.success) {
+            let token = localStorage.getItem('token');
+            let config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+            this.props.initHomeEvents(config);
+        }
+    }
+
+
     render() {
         let user = parseInt(localStorage.getItem('user'), 10);
-        var shouldHidde = "btn btn-primary";
+        var participateHide = "btn btn-primary";
+        var deleteHide = "close";
         if (user === this.props.eventCreator){
-            shouldHidde = "btn btn-primary hiddenButton"
+            participateHide = "btn btn-primary hiddenButton";
+        } else {
+            deleteHide = "close hiddenButton";
         }
+
         return(
             <div className="card container event-card">
                 <div className="row">
@@ -21,13 +40,21 @@ class EventCard extends Component {
                         <h3 className="event-user-name">{this.props.firstName} {this.props.lastName}</h3>
                     </div>
                     <div className="col-3">
-                        <button className="close"><span aria-hidden="true">&times;</span></button>
+                        <button className={deleteHide} onClick={() => {
+                            let token = localStorage.getItem('token');
+                            let config = {
+                                headers: {
+                                    "Authorization": `Bearer ${token}`
+                                }
+                            }
+                            this.props.deleteEvent(this.props.eventId, this.props.key, config);
+                        }}><span aria-hidden="true">&times;</span></button>
                     </div>
                 </div>
                     <div className="card-body">
                         <p>{this.props.description}</p>
                         <div className="d-flex justify-content-between align-items-center">
-                            <button className={shouldHidde}>Participer</button>
+                            <button className={participateHide}>Participer</button>
                             <span className="badge badge-info">1 / {this.props.maxParticipants}</span>
                         </div>
                     </div>
@@ -36,4 +63,8 @@ class EventCard extends Component {
     }
 }
 
-export default EventCard;
+const mapStateToProps = state => ({
+    success: state.events.success,
+})
+
+export default connect(mapStateToProps, {deleteEvent, initHomeEvents})(EventCard);

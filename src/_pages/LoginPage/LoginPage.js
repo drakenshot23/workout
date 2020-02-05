@@ -61,7 +61,7 @@ class LoginPage extends Component {
                                   <Field type="email" name="email" className="form-control userMail" placeholder="email@example.com" validate={this.validateEmail} value={props.values.email}/>
                                   <ErrorMessage name="email" />
                                   <Field type="password" name="password" className="form-control userPassword" placeholder="Mot de passe" validate={this.validatePassword} value={props.values.password}/>
-                                  <ErrorMessage name="password" />
+                                  <ErrorMessage name="password"/>
                                   <button type="submit" className="btn btn-primary userLoginBtn">
                                     Connexion
                                   </button>
